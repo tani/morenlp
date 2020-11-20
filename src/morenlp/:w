@@ -1,0 +1,37 @@
+(ns morenlp.core
+  (:gen-class)
+  (:import [edu.stanford.nlp.simple Document]
+           [edu.stanford.nlp.pipeline Annotation StanfordCoreNLP]
+           [edu.stanford.nlp.ling CoreAnnotations$SentencesAnnotation]
+           [edu.stanford.nlp.trees TreeCoreAnnotations$TreeAnnotation])
+  (:require [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [ring.util.response :refer [response]]
+            [clojure.string :refer [join replace]]))
+
+(defn tree->arraymap [tree]
+  {:label (-> (.. tree (label) (value))
+              (replace "$" "_S"))
+   :children (map tree->arraymap (.children tree))})
+
+(defn createPipeline [& annotators]
+  (StanfordCoreNLP.
+   (doto (java.util.Properties.)
+     (.setProperty "annotators" (join "," annotators)))))
+
+(def createPipelineM (memoize createPipeline))
+
+(defn parse [input]
+  (let [pipeline (createPipelineM "tokenize" "ssplit" "pos" "lemma" "ner" "parse")
+        annotation (Annotation. input)]
+    (.annotate pipeline annotation)
+    (->> (.get annotation CoreAnnotations$SentencesAnnotation)
+         (map #(.get % TreeCoreAnnotations$TreeAnnotation))
+         (map tree->arraymap))))
+
+(defn handler [request]
+  (let [id (-> request :body :id)
+        method (-> request :body :method symbol resolve)
+        params (-> request :body :method)]
+    {:jsonrpc 2.0 :id id :result (apply method params)}))
+
+(defn app (-> handler (wrap-json-body {:keywords? true}) wrap-json-response))
