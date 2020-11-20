@@ -10,7 +10,7 @@ You can call `edu.stanford.nlp.pipeline.StanfordCoreNLP.process` via JSON-RPC 2.
 ### JSON-RPC
 
 ```sh
-$ lein ring server-headless &
+$ PORT=8888 lein ring server-headless # or PORT=8888 java -jar morenlp-<version>-standalone.jar
 $ curl -X POST -H 'application/json' -d '{"jsonrpc":"2.0", "id":"0000-0000-0000", "method": "process", "params": ["Hello world."]}'
 $ curl -X POST -H 'application/json' -d '{"jsonrpc":"2.0", "id":"0000-0000-0000", "method": "process", "params": ["Hello world.", {"annotators": "tokenize,ssplit,pos,lemma,ner,parse"}]}'
 $ curl -X POST -H 'application/json' -d '{"jsonrpc":"2.0", "id":"0000-0000-0000", "method": "process", "params": ["Hello world.", {"annotators": "tokenize,ssplit,pos,lemma,ner,parse", "parse.binaryTrees": "true"}]}'
