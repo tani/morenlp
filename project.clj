@@ -3,7 +3,7 @@
   :url "https://github.com/tani/morenlp"
   :scm {:name "git" :url "https://github.com/tani/morenlp"}
   :license {:name "MIT License"}
-  :dependencies [[org.clojure/clojure "1.10.1"]
+  :dependencies [[org.clojure/clojure "1.10.3"]
                  [org.clojure/tools.logging "1.1.0"]
                  [org.clojure/data.json "1.0.0"]
                  [edu.stanford.nlp/stanford-corenlp "4.0.0"]
