@@ -5,7 +5,7 @@
   :license {:name "MIT License"}
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [org.clojure/tools.logging "1.1.0"]
-                 [org.clojure/data.json "1.0.0"]
+                 [org.clojure/data.json "2.4.0"]
                  [edu.stanford.nlp/stanford-corenlp "4.2.0"]
                  [edu.stanford.nlp/stanford-corenlp "4.2.0" :classifier "models"]
                  [org.slf4j/slf4j-simple "1.7.30"]
