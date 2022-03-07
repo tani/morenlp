@@ -13,6 +13,6 @@
                  [ring/ring-jetty-adapter "1.8.2"]
                  [ring/ring-json "0.5.0"]
                  [javax.servlet/javax.servlet-api "4.0.1"]]
-  :plugins [[lein-ring "0.12.5"]]
+  :plugins [[lein-ring "0.12.6"]]
   :ring {:handler morenlp.core/app}
   :repl-options {:init-ns morenlp.core})
