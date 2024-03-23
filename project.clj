@@ -10,7 +10,7 @@
                  [edu.stanford.nlp/stanford-corenlp "4.2.0" :classifier "models"]
                  [org.slf4j/slf4j-simple "1.7.30"]
                  [ring/ring-core "1.8.2"]
-                 [ring/ring-jetty-adapter "1.8.2"]
+                 [ring/ring-jetty-adapter "1.12.1"]
                  [ring/ring-json "0.5.0"]
                  [javax.servlet/javax.servlet-api "4.0.1"]]
   :plugins [[lein-ring "0.12.5"]]
